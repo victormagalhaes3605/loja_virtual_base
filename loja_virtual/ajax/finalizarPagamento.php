@@ -1,25 +1,27 @@
-<?php
-	include('../includeConstants.php');
-	$data['token'] = '6C2A873D3E1D4AD38B69CBB113FE00E0';
-	$data['email'] = 'gui_grillo13@hotmail.com';
-	$data['currency'] = 'BRL';
-	$data['notificationURL'] = 'http://localhost/loja_virtual/retorno.php';
-	$data['reference'] = uniqid();
-	$index = 1;
-	$itemsCarrinho = $_SESSION['carrinho'];
+
+	<?php
+	include('../includeConstants.php')	;
+		$data['token'] = '004411AFE41C4DF8ADC420D3CB0EFDD0';
+		$data['email'] = 'victor.magalhaes3605@gmail.com';
+		$data['currency'] = 'BRL';
+		$data['reference'] = uniqid();
+		$index = 1;
+		$itemsCarrinho = $_SESSION['carrinho'];
 	foreach ($itemsCarrinho as $key => $value) {
-			$idProduto = $key;
-			$produto = \MySql::conectar()->prepare("SELECT * FROM `tb_admin.estoque` WHERE id = $idProduto");
-			$produto->execute();
-			$produto = $produto->fetch();
-			$valor = $produto['preco'];
-			$data["itemId$index"] = $index;
-			$data["itemQuantity$index"] = $value;
-			$data["itemDescription$index"] = $produto['nome'];
-			$data["itemAmount$index"] = number_format($produto['preco'], 2, '.', '');
-			$index++;
-			$sql = \MySql::conectar()->prepare("INSERT INTO `tb_admin.pedidos` VALUES (null,?,?,?,?)");
-			$sql->execute(array($data['reference'],$produto['id'],$value,'pendente'));
+		$idProduto = $key;  
+		$produto = \MySql::conectar()->prepare("SELECT * FROM `tb_admin.estoque` WHERE id = $idProduto");
+		$produto->execute();
+		$produto = $produto->fetch();
+		$valor = $produto['preco'];
+		$data["itemId$index"] = $index;
+		$data["itemQuantity$index"] = $value;
+		$data["ItemDescription$index"] = $produto['nome'];
+		$data["itemAmount$index"] = number_format($produto['preco'], 2 ,'.', '');
+		//$total+=$valor;
+
+		$index++;
+		
+
 	}
 
 	$url = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
@@ -37,7 +39,4 @@
 	curl_close($curl);
 	$xml = simplexml_load_string($xml);
 
-	echo $xml->code;
-
-	$_SESSION['carrinho'] = array();
-?>
+	?>

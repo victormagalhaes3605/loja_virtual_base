@@ -44,3 +44,11 @@
         <div class="clear"></div>
     </div><!--container-->
 </div><!--finalizar-pedido-->
+
+
+
+
+<script src="<?php echo INCLUDE_PATH ?>js/jquery.js"></script>
+<script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+<script src="<?php echo INCLUDE_PATH ?>js/constants.js"></script>
+<script src="<?php echo INCLUDE_PATH ?>js/scripts.js"></script>
