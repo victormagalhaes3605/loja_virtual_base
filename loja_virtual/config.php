@@ -1,5 +1,7 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
 	session_start();
 	date_default_timezone_set('America/Sao_Paulo');
 	$autoload = function($class){

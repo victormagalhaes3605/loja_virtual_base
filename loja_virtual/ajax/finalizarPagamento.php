@@ -1,8 +1,9 @@
 
 	<?php
+	
 	include('../includeConstants.php')	;
-		$data['token'] = '004411AFE41C4DF8ADC420D3CB0EFDD0';
 		$data['email'] = 'victor.magalhaes3605@gmail.com';
+		$data['token'] = '004411AFE41C4DF8ADC420D3CB0EFDD0';
 		$data['currency'] = 'BRL';
 		$data['reference'] = uniqid();
 		$index = 1;
@@ -24,7 +25,7 @@
 
 	}
 
-	$url = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
+	$url = "//ws.sandbox.pagseguro.uol.com.br/v2/checkout";
 	$data = http_build_query($data);
 
 	$curl = curl_init($url);
@@ -37,6 +38,8 @@
 
 
 	curl_close($curl);
+
 	$xml = simplexml_load_string($xml);
+
 
 	?>
